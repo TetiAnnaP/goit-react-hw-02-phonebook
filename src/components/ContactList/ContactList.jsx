@@ -1,15 +1,17 @@
-import { Component } from 'react';
-import css from "./ContactList.module.css"
-import {nanoid} from "nanoid";
+import { nanoid } from 'nanoid';
 
-export class ContactList extends Component{
-   state = this.props.state;
-
-    render() {
+const ContactList = ({ contacts }) => {
+  return (
+    <ul>
+      {contacts.map(contact => {
         return (
-            <>
-                
-            </>
-        )
-    }
-}
+          <li key={nanoid()}>
+            {contact.name}: {contact.number}
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+export default ContactList;

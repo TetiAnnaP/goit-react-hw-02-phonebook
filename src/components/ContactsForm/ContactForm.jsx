@@ -1,6 +1,6 @@
-import css from "./ContactsForm.module.css"
 import {nanoid} from "nanoid";
 import { Component } from 'react'
+import css from "./ContactsForm.module.css"
 
 export class ContactsForm extends Component {
 
@@ -29,26 +29,11 @@ export class ContactsForm extends Component {
         this.props.addContact(newContact);
 
         this.setState({ name: '', number: '' });
-       
     }
-
-
-
-    // handleByFilter = (e) => {
-    //     const value = e.target.value;
-    //      const filteredContacts = this.contactsList.filter(contact => contact.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
-    //     this.setState({
-    //         filter: e.target.value,
-    //         contacts: filteredContacts
-    //     })
-       
-    //     console.log(e.target.value);
-    //     console.log(this.state);
-       
-    // }
+    
     
     render() {
-        const { contacts } = this.props.stateApp;
+        
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
@@ -77,32 +62,8 @@ export class ContactsForm extends Component {
                     </label>
                 <button className={css.sbmBtn} type="submit">Add contact</button>
                 </form>
-                <h2 className={css.h2}>Contacts</h2>
-                <ul>
-                    {contacts.map(contact => {
-                        return (
-                            <li key={nanoid()}>{contact.name}: {contact.number}</li>
-                        )
-                    })}
-                </ul>
 
-
-
-                
-{/* 
-                <p>Find contact by name</p>
-                <input
-                    className={css.inputName}
-                    type="text"
-                    name="filter"
-                    value={this.state.filter}
-                    onChange={this.handleByFilter}
-                /> */}
                 </>
-
-                
-            
-              
         )
             
     }
