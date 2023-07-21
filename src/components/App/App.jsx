@@ -19,12 +19,10 @@ export class App extends Component {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
-    console.log(this.state.contacts);
   };
 
-  foundContacts = (filteredContacts, value) => {
+  handleFilterChange = value => {
     this.setState({
-      contacts: filteredContacts,
       filter: value,
     });
   };
@@ -45,11 +43,13 @@ export class App extends Component {
           <h1 className={css.h1}>Phonebook</h1>
           <ContactsForm stateApp={this.state} addContact={this.addContact} />
           <Filter
-            contactsList={this.state.contacts}
-            foundContacts={this.foundContacts}
+            handleFilterChange={this.handleFilterChange}
             filter={this.state.filter}
           />
-          <ContactList contacts={this.state.contacts} />
+          <ContactList
+            contacts={this.state.contacts}
+            filter={this.state.filter}
+          />
         </div>
       </div>
     );

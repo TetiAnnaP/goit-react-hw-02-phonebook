@@ -1,9 +1,13 @@
 import { nanoid } from 'nanoid';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, filter }) => {
+  const visibleContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter)
+  );
+
   return (
     <ul>
-      {contacts.map(contact => {
+      {visibleContacts.map(contact => {
         return (
           <li key={nanoid()}>
             {contact.name}: {contact.number}
