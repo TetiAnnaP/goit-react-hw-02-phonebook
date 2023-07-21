@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import {ContactsForm} from "../ContactsForm/ContactForm"
-import { ContactList } from "../ContactList/ContactList"
 import css from "./App.module.css"
 
 export class App extends Component{
@@ -13,9 +12,15 @@ export class App extends Component{
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
         ],
         filter: '',
-        name: '',
-        number: ''
-    }
+       
+  }
+  
+  addContact = (newContact) => {
+    this.setState((prevState) => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
 
   render() {
     return (<div
@@ -30,8 +35,10 @@ export class App extends Component{
       }}
     >
       <div className={css.wrapper}>
-      <ContactsForm state={this.state} />
-        <ContactList state={this.state} />
+      <h1 className={css.h1}>Phonebook</h1>
+        <ContactsForm stateApp={this.state}
+          addContact={this.addContact} />
+        
       
       </div>      
     </div>)

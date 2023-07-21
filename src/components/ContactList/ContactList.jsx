@@ -8,14 +8,7 @@ export class ContactList extends Component{
     render() {
         return (
             <>
-                <h2 className={css.h2}>Contacts</h2>
-                <ul>
-                    {this.state.contacts.map(contact => {
-                        return (
-                            <li key={nanoid()}>{contact.name}: {contact.number}</li>
-                        )
-                    })}
-                </ul>
+                
             </>
         )
     }

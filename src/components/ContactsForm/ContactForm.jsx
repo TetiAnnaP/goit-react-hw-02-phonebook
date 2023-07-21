@@ -1,47 +1,56 @@
-
 import css from "./ContactsForm.module.css"
 import {nanoid} from "nanoid";
 import { Component } from 'react'
 
-
 export class ContactsForm extends Component {
 
-    state = this.props.state;
-    contactsList = this.state.contacts;
+    state = {
+        name: '',
+        number: ''
+    }
 
     handleChangeName = (e) => {        
-        this.setState({name: e.target.value});
-    }
+        this.setState({ name: e.target.value });
+     }
 
     handleChangeNumber=(e) => {
         this.setState({ number: e.target.value });
     }
 
     handleSubmit = (e) => {
-                e.preventDefault();
-        this.setState(prevState => {
-            return {
-            contacts: [...prevState.contacts, { id: nanoid(), name: prevState.name, number: prevState.number}] 
-            }
-        })
+        e.preventDefault();
+        
+    const newContact = {
+        id: nanoid(),
+        name: this.state.name,
+        number: this.state.number,
+        };
+        
+        this.props.addContact(newContact);
+
+        this.setState({ name: '', number: '' });
+       
     }
 
-    handleByFilter = (e) => {
-        const value = e.target.value;
-         const filteredContacts = this.contactsList.filter(contact => contact.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
-        this.setState({
-            filter: e.target.value,
-            contacts: filteredContacts
-        })
+
+
+    // handleByFilter = (e) => {
+    //     const value = e.target.value;
+    //      const filteredContacts = this.contactsList.filter(contact => contact.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+    //     this.setState({
+    //         filter: e.target.value,
+    //         contacts: filteredContacts
+    //     })
        
-        console.log(e.target.value);
-        console.log(this.state);
+    //     console.log(e.target.value);
+    //     console.log(this.state);
        
-    }
+    // }
     
     render() {
+        const { contacts } = this.props.stateApp;
         return (
-            <> <h1 className={css.h1}>Phonebook</h1>
+            <>
                 <form onSubmit={this.handleSubmit}>
                     <label  className={css.label}>Name
                         <input
@@ -68,9 +77,19 @@ export class ContactsForm extends Component {
                     </label>
                 <button className={css.sbmBtn} type="submit">Add contact</button>
                 </form>
+                <h2 className={css.h2}>Contacts</h2>
+                <ul>
+                    {contacts.map(contact => {
+                        return (
+                            <li key={nanoid()}>{contact.name}: {contact.number}</li>
+                        )
+                    })}
+                </ul>
+
+
 
                 
-
+{/* 
                 <p>Find contact by name</p>
                 <input
                     className={css.inputName}
@@ -78,9 +97,13 @@ export class ContactsForm extends Component {
                     name="filter"
                     value={this.state.filter}
                     onChange={this.handleByFilter}
-                />
-            </>
-         )
+                /> */}
+                </>
+
+                
+            
+              
+        )
             
     }
 }
