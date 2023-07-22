@@ -18,6 +18,16 @@ export class ContactsForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
+    const contactsList = this.props.stateApp.contacts;
+    const nameExists = contactsList.some(
+      contact => contact.name.toLowerCase() === this.state.name.toLowerCase()
+    );
+    if (nameExists) {
+      alert('This name already exists in the phonebook!');
+      return;
+    }
+
     const newContact = {
       id: nanoid(),
       name: this.state.name,
@@ -39,7 +49,7 @@ export class ContactsForm extends Component {
               className={css.inputName}
               type="text"
               name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               value={this.state.name}
               required
@@ -53,7 +63,7 @@ export class ContactsForm extends Component {
               className={css.inputName}
               type="tel"
               name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               value={this.state.number}
               required

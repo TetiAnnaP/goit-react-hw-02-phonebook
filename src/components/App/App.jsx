@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { ContactsForm } from '../ContactsForm/ContactForm';
 import css from './App.module.css';
-import ContactList from 'components/ContactList/ContactList';
+import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
 
 export class App extends Component {
@@ -27,6 +27,14 @@ export class App extends Component {
     });
   };
 
+  handleDeleteContact = id => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== id),
+      };
+    });
+  };
+
   render() {
     return (
       <div
@@ -49,6 +57,7 @@ export class App extends Component {
           <ContactList
             contacts={this.state.contacts}
             filter={this.state.filter}
+            handleDeleteContact={this.handleDeleteContact}
           />
         </div>
       </div>

@@ -1,21 +1,39 @@
 import { nanoid } from 'nanoid';
+import css from './ContactList.module.css';
+import { Component } from 'react';
 
-const ContactList = ({ contacts, filter }) => {
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter)
-  );
+export class ContactList extends Component {
+  
+  handleDeleteBtn = e => {
+    this.props.handleDeleteContact(e.target.id);
+  };
 
-  return (
-    <ul>
-      {visibleContacts.map(contact => {
-        return (
-          <li key={nanoid()}>
-            {contact.name}: {contact.number}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
-
-export default ContactList;
+  render() {
+    const visibleContacts = this.props.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.props.filter)
+    );
+    {
+    }
+    return (
+      <ul className={css.ul}>
+        {visibleContacts.map(contact => {
+          return (
+            <li className={css.li} key={nanoid()}>
+              <p className={css.text}>
+                {contact.name}: {contact.number}
+              </p>
+              <button
+                className={css.sbmBtn}
+                type="button"
+                id={contact.id}
+                onClick={this.handleDeleteBtn}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+}

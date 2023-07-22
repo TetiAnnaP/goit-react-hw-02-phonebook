@@ -5,6 +5,7 @@ export class Filter extends Component {
   handleByFilter = e => {
     const value = e.target.value;
     this.props.handleFilterChange(value.trim().toLowerCase());
+    // console.log(value);
   };
 
   render() {
