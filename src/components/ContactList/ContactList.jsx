@@ -3,7 +3,6 @@ import css from './ContactList.module.css';
 import { Component } from 'react';
 
 export class ContactList extends Component {
-  
   handleDeleteBtn = e => {
     this.props.handleDeleteContact(e.target.id);
   };
@@ -12,8 +11,7 @@ export class ContactList extends Component {
     const visibleContacts = this.props.contacts.filter(contact =>
       contact.name.toLowerCase().includes(this.props.filter)
     );
-    {
-    }
+
     return (
       <ul className={css.ul}>
         {visibleContacts.map(contact => {
